@@ -1,0 +1,12 @@
+{
+    "Name":"Sally",
+    "Age":18,
+    "Gender":"Female",
+    "Skills":{
+        "IT": ["Javascript","C#","Java"],
+        "Language": ["Chinese","English"]
+    },
+    "Education":[
+      "Computer science","Biologic science"
+    ]
+}
