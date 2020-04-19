@@ -204,7 +204,7 @@ export class JsonNode extends Component{
     /* -------------------------
     *  expandJson
     *  -------------------------
-    *  @Description: Expand type of this json node      展开此json对象节点
+    *  @Description: Traverse and expand of a json object      遍历并展开某个json对象
     *  @Params:  
     *      - json  <Object>    The Json object to be handled.  需要处理的json对象.  
     *  @Returns: void
@@ -216,7 +216,7 @@ export class JsonNode extends Component{
             let itm = json[k];
 
             if(itm instanceof Object){
-                // branch node   分支节点
+                //1) Branch node   分支节点
                 list.push(<JsonNode key={k} jsonKey = {k} jsonObj = {itm}
                         del={this.delNode} add={this.addNode} mod={this.modNode}
                         convert={this.convertNode}
@@ -224,7 +224,7 @@ export class JsonNode extends Component{
                 );
 
             }else{
-                // leaf node  末端叶子节点 
+                //2) Leaf node  末端叶子节点 
                 if(json instanceof Array){
                     // Array leaf node  数组叶子节点 
                     list.push(
