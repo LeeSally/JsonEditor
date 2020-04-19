@@ -186,15 +186,18 @@ class Editor extends Component{
         let res = "";
         res = "\n" + spacex1 ;
         
+        
         if(json instanceof Array){
             res += "[\n";
         }else{ 
-            res += "{\n";
+            res += "{\n"; 
         }
         
-
+        let count = 0;
         for(let k in json){
-            let node = json[k]; 
+            let node = json[k];
+            count++;
+
             if(node instanceof Object){
                 //1) Json Object:incursive     Json 对象: 递归调用 
                 if(!(node instanceof Array) || !(json instanceof Array)){ 
@@ -211,7 +214,11 @@ class Editor extends Component{
             }
             res += ",\n"; 
         }
-        res = res.substring(0,res.length-2);
+ 
+        if(count>0){
+            res = res.substring(0,res.length-2);
+        }
+        
         res += "\n" + spacex1;
 
         if(json instanceof Array){
@@ -220,6 +227,7 @@ class Editor extends Component{
             res += "}";
         }
 
+        console.log(res);
         return res;
     }
 
@@ -343,6 +351,7 @@ class Editor extends Component{
             }
 
             //4) Update state  更新状态
+            
             state.rawVal = this.formatJson(state.jsonObj);
             return state;
         })

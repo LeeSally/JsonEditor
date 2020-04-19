@@ -82,6 +82,19 @@ class ArrLeaf extends Component{
     } 
 
     /* -------------------------
+    *  addChild
+    *  -------------------------
+    *  @Description: Add child node in this leaf node      在此json叶子节点增加子节点
+    *  @Params: 
+    *  @Returns: void
+    */
+   addChild = () =>{ 
+    if(this.props.add){
+        this.props.add([this.props.jsonKey]);
+    }
+}
+
+    /* -------------------------
     *  mod
     *  -------------------------
     *  @Description: Modify value of this array node      更改此json数组叶子节点的值
@@ -106,6 +119,9 @@ class ArrLeaf extends Component{
                 <button type="button" className="json-tree-item-btn json-tree-item-btn-del"
                  onClick={this.del}
                 ></button> 
+
+                <button type="button" className="json-tree-item-btn json-tree-item-btn-add"
+                 onClick={this.addChild}></button>
             </div>
         );
     }
@@ -133,7 +149,7 @@ export class JsonNode extends Component{
     /* -------------------------
     *  addNode
     *  -------------------------
-    *  @Description: Add this json node      新增json节点
+    *  @Description: Add mew json node      新增json节点
     *  @Params: 
     *      - nodeChain  <Array[string]>   An chain array indicated the position of this node.  
     *                                     用于定位该节点在json中位置的数组链
@@ -149,9 +165,9 @@ export class JsonNode extends Component{
     }
 
     /* -------------------------
-    *  addNode
+    *  modNode
     *  -------------------------
-    *  @Description: Add this json node      新增json节点
+    *  @Description: Modify value of this json node      修改json节点数值
     *  @Params: 
     *      - val <string>  the value to be changed for this node.  此节点需要更改的值
     *      - nodeChain  <Array[string]>   An chain array indicated the position of this node.  
@@ -213,7 +229,7 @@ export class JsonNode extends Component{
                     // Array leaf node  数组叶子节点 
                     list.push(
                         <ArrLeaf key={k} jsonKey = {k} jsonVal = {itm}
-                        del={this.delNode} mod={this.modNode} convert={this.convertNode}/>
+                        del={this.delNode} mod={this.modNode} add={this.addNode}/>
                     );
                 }else{
                     // Json leaf node    对象叶子节点 
@@ -239,10 +255,11 @@ export class JsonNode extends Component{
                         value = {this.props.jsonKey}
                         readOnly = "readonly"
                     />
+                    
                     <button type="button" className="json-tree-item-btn json-tree-item-btn-del"
                      onClick={()=>{this.delNode([])}}
                     ></button>
-
+                    
                     <button type="button" className="json-tree-item-btn json-tree-item-btn-convert"
                      onClick={()=>{this.convertNode([])}}
                      ></button>
